@@ -1,0 +1,10 @@
+
+<div class="mt-5" *ngIf="user">
+    <p>{{ user.name }}</p>
+    <p>{{ user.password }}</p>
+    <p>{{ user.email }}</p>
+    <br>
+    <a class="btn btn-secondary" [routerLink]="['/users/edit', user.id]">edit</a>
+</div>
+
+<router-outlet></router-outlet>

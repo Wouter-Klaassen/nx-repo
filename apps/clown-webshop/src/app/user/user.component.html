@@ -1,0 +1,21 @@
+<p class="mt-3">Actieve Gebruikers</p>
+<div class="row" *ngFor="let user of users">
+    <div class="col">
+        <a       
+        [title]="user.name + ' details'"
+        [routerLink]="['/users', user.id]">
+        {{user.name}}</a>
+    </div>
+    <div class="col">
+        <button type="" (click)="deleteUser(user)">delete</button>
+    </div>
+</div>
+<br>
+<br>
+<div>
+    <button class="btn btn-secondary" (click)="deleteAll()">Delete All</button>
+</div>
+
+<br>
+<br>
+<router-outlet></router-outlet>

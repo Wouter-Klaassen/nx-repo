@@ -1,0 +1,58 @@
+<div class="mt-5" *ngIf="user != undefined">
+        <div>
+            <p>
+                <b>{{user.getName()}}</b>
+            </p>
+            <label for="name">new name: </label>
+            <input id="name" type="text" [formControl]="name">
+            <button (click)="editName()">Save</button>
+        </div>
+        <br>
+        <div>
+            <p>
+                <b>{{user.getPassword()}}</b>
+            </p>
+            <label for="password">new password: </label>
+            <input id="password" type="text" [formControl]="password">
+            <button (click)="editPassword()">Save</button>  
+        </div>
+        <br>
+        <div>
+            <p>
+                <b>{{user.getEmail()}}</b>
+            </p>    
+            <label for="email">new email: </label>
+            <input id="email" type="text" [formControl]="email">
+            <button (click)="editEmail()">Save</button>
+        </div>
+</div>
+<div class="mt-5" *ngIf="user == undefined">
+    <div class="row">
+        <div class="col">
+            <label for="name">Name: </label>
+        </div>
+        <div class="col">
+            <input id="name" type="text" [formControl]="name">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label for="password">Password: </label>
+        </div>
+        <div class="col">
+            <input id="password" type="text" [formControl]="password">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label for="email">Email: </label>
+        </div>
+        <div class="col">
+            <input id="email" type="text" [formControl]="email">
+        </div>
+    </div>
+    <br>
+    <div>
+        <button class="btn btn-secondary" (click)="addUser()">Submit</button>
+    </div>
+</div>

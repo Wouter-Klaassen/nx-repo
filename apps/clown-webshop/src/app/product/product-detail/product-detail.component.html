@@ -1,0 +1,15 @@
+<div class="mt-5" *ngIf="product">
+    <p>
+        <b>{{ product.title }}</b>
+    </p>
+        <br>
+    <p>
+        beschrijving:
+        <br>
+        {{ product.description }}
+    </p>
+        <br>
+    <p>Prijs: €{{ product.prijs }}</p>
+    <br>
+    <a class="btn btn-secondary" [routerLink]="['/products/edit', product.id]">edit</a>
+</div>

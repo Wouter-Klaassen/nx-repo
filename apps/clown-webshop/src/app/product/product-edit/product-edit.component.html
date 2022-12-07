@@ -1,0 +1,60 @@
+<div ngClass="mt-5" *ngIf="product != undefined" class="col">
+    <div *ngIf="product.id >= 0">
+        <div>
+            <p>
+                <b>{{product.title}}</b>
+            </p>
+            <label for="title">new title: </label>
+            <input id="title" type="text" [formControl]="title">
+            <button (click)="editTitle()">Save</button>
+        </div>
+        <br>
+        <div>
+            <p>
+                <b>{{product.description}}</b>
+            </p>
+            <label for="description">new description: </label>
+            <input id="description" type="text" [formControl]="description">
+            <button (click)="editDescription()">Save</button>  
+        </div>
+        <br>
+        <div>
+            <p>
+                <b>{{product.prijs}}</b>
+            </p>    
+            <label for="prijs">new price: </label>
+            <input id="prijs" type="text" [formControl]="prijs">
+            <button (click)="editPrijs()">Save</button>
+        </div>
+    </div>
+</div>
+<div class="mt-5" *ngIf="product == undefined">
+    <div class="row">
+        <div class="col">
+            <label for="title">Title: </label>
+        </div>
+        <div class="col">
+            <input id="title" type="text" [formControl]="title">
+        </div>
+    </div>
+    <div class="row" >
+        <div class="col">
+            <label for="description">Description: </label>
+        </div>
+        <div class="col">
+            <input id="description" type="text" [formControl]="description">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label for="description">Prijs: </label>
+        </div>
+        <div class="col">
+            <input id="description" type="text" [formControl]="prijs">
+        </div>
+    </div>
+    <br>
+    <div>
+        <button class="btn btn-secondary" type="" (click)="add()">Submit</button>
+    </div>
+</div>

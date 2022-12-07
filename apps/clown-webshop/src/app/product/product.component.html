@@ -1,0 +1,16 @@
+<p class="mt-3">Onze Producten</p>
+
+<div class="row" *ngFor="let product of products">
+    <div class="col">
+        <a       
+        [title]="product.title + ' details'"
+        [routerLink]="['/products', product.id]">
+        {{product.title}}</a>
+    </div>
+    <div class="col">
+        <button (click)="delete(product)">delete</button>
+    </div>
+</div>
+<div class="mt-5">
+    <a class="btn btn-secondary" [routerLink]="['/products/edit/-1']"><span class="text-center">Add Product</span> </a>
+</div>
