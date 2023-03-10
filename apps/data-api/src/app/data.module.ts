@@ -9,24 +9,30 @@ import { PurchaseLogService } from "./purchase_log/purchase_log.service";
 import { ReviewController } from "./review/review.controller";
 import { Review, ReviewSchema } from "./review/review.schema";
 import { ReviewService } from "./review/review.service";
+import { ShopcartController } from "./shopcart/shopcart.controller";
+import { Shopcart, ShopcartSchema } from "./shopcart/shopcart.schema";
+import { ShopcartService } from "./shopcart/shopcart.service";
 
 @Module({
     imports:[
         MongooseModule.forFeature([
             {name: Product.name, schema: ProductSchema },
             {name: PurchaseLog.name, schema: PurchaseLogSchema},
-            {name: Review.name, schema: ReviewSchema}
+            {name: Review.name, schema: ReviewSchema},
+            {name: Shopcart.name, schema: ShopcartSchema}
         ]),
     ],
     controllers:[
         ReviewController,
         PurchaseLogController,
         ProductController,
+        ShopcartController
     ],
     providers:[
         ReviewService,
         PurchaseLogService,
         ProductService,
+        ShopcartService
     ]
 })
 export class DataModule{}
