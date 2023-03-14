@@ -6,9 +6,6 @@ export type ProductDocument = Product & Document;
 
 @Schema()
 export class Product{
-    @Prop({default: uuid, index: true})
-    id: string;
-
     @Prop({
         required: true,
         unique: true,

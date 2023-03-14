@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, Put } from "@nestjs/common";
 import { ProductInfo } from "@nx-repo/data";
 import { Product } from "./product.schema";
 import { ProductService } from "./product.service";
@@ -20,12 +20,26 @@ export class ProductController{
 
     @Put(':id')
     async update(@Param('id') id: string, @Body() update: Product) {
-        await this.productService.update(id, update);
+        try{
+            await this.productService.update(id, update )
+            return {statusCode: 200, message:"OK"}
+        }
+        catch(e){
+            console.log(e);
+            
+            throw new HttpException("Update Unsuccesfull", HttpStatus.BAD_REQUEST);
+        }
     }
 
-    @Post('create')
+    @Post()
     async create(@Body()product: Product){
-        await this.productService.create(product)
+        try{
+            await this.productService.create(product)
+            return {statusCode: 200, message:"OK"}
+        }
+        catch(e){
+            throw new HttpException("Creation Unsuccesfull", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Delete(':id')

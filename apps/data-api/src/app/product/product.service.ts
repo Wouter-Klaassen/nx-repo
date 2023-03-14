@@ -1,7 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { ProductInfo } from "@nx-repo/data";
-import { match } from "assert";
 import { Model } from "mongoose";
 import { Product, ProductDocument } from "./product.schema";
 
@@ -14,9 +13,9 @@ export class ProductService{
     }
 
     async getOne(productId: string): Promise<ProductInfo | null>{
-        return this.productModel.findById([
+        return this.productModel.findById(
             productId,
-        ]);
+        );
     }
 
     async delete(productId: string){
@@ -30,7 +29,7 @@ export class ProductService{
     }
 
     async update(productId: string, updates: Product){
-        await this.productModel.findByIdAndUpdate({id : productId}, updates)
+        await this.productModel.findByIdAndUpdate({_id : productId}, updates)
     }
 
 }

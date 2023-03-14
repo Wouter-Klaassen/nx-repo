@@ -14,16 +14,11 @@ export class UserService {
   ){}
 
   async getAll(): Promise<UserInfo[]> {
-    return this.userModel.aggregate([
-    ]);
+    return this.userModel.find();
   }
 
   async getOne(userId: string): Promise<User | null> {
-    const users = await this.userModel.aggregate([
-        {$match: {
-            id: userId,
-        }},
-    ]);
+    const users = await this.userModel.findById( userId);
 
     return users[0];
   }

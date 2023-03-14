@@ -2,7 +2,6 @@ import { Id } from "./id.type";
 import { Review } from "./review.interface";
 
 export interface ProductIdentity{
-    id: Id
     name: string
 }
 

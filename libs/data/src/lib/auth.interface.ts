@@ -5,6 +5,7 @@ export interface UserCredentials {
 
 export interface UserRegistration extends UserCredentials {
   emailAddress: string
+  roles: string[]
 }
 
 export interface Token {
