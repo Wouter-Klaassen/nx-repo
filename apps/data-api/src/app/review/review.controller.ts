@@ -21,6 +21,17 @@ export class ReviewController{
         return this.reviewService.getOne(id);
     }
 
+    @Get('product/:id')
+    async getByProduct(@Param('id') id: string){
+        return this.reviewService.getProductReviews(id);
+    }
+
+    @Get('user/:id')
+    async getByUser(@Param('id') id :string){
+        console.log('id: ' + id)
+        return this.reviewService.getUserReviews(id);
+    }
+
     @Put(':id')
     async update(@Param('id') id: string, @Body() update: Review) {
         try{
@@ -39,6 +50,7 @@ export class ReviewController{
         try{
             review.productId = productId
             review.userId = token.id
+            console.log(token.id)
             const newReview = await this.reviewService.create(review)
             await this.reviewService.createNode(token.id, newReview.id)
             await this.reviewService.addToProduct(productId, newReview.id)

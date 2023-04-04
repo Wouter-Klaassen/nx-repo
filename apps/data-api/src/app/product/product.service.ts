@@ -41,8 +41,23 @@ export class ProductService{
         await this.neo4jService.singleWrite(NeoQueries.removeRelation, {idA, idB})
     }
 
-    async getRelatedProducts(id: string){
-        return this.neo4jService.singleRead(NeoQueries.getRelatedProducts, {id})
+    async getRelatedProducts(productId: string){
+        const ids = await this.neo4jService.singleRead(NeoQueries.findRelated,{productId})
+
+        console.log(ids.records)
+
+        const matches= [];
+
+        for(const record of ids.records){
+            const id = record.get('match');
+            console.log('id:' + id)
+            const match = await this.productModel.findOne({ _id: id });
+            matches.push(match)
+        }
+
+        console.log(matches)
+
+        return matches
     }
 
     async createNode(id: string) {

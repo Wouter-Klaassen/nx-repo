@@ -11,4 +11,8 @@ export const NeoQueries = {
 
     deleteNode: 'MATCH (a:Product {id: $id}) \
     DETACH DELETE a',
+
+    findRelated: 'MATCH (a:Product)-[r:Related]-(b:Product)\
+                    WHERE a.id=$productId\
+                    RETURN b.id AS match'
 }

@@ -3,7 +3,7 @@ export const NeoQueries = {
      
     addToUser : 'MATCH (a:Review),(b:User) \
                 WHERE b.id = $userId AND a.id = $id \
-                CREATE (a)-[:Created]->(b)',
+                CREATE (b)-[:Created]->(a)',
 
     deleteNode :'MATCH (a:Review {id: $id}) \
                     DETACH DELETE a',
@@ -12,4 +12,12 @@ export const NeoQueries = {
                     (a:Review {id: $idB}), \
                     (b:Product {id: $idA}) \
                     CREATE (a)-[:Reviews]->(b)',
+
+    findByProduct : 'MATCH (a:Review)-[r:Reviews]->(b:Product)\
+                    WHERE b.id=$productId\
+                    RETURN a.id AS match',
+
+    findByUser : 'MATCH (a:User)-[r:Created]->(b:Review)\
+                 WHERE a.id=$userId\
+                    RETURN b.id AS match'
 }

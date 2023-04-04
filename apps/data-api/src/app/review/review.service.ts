@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { ReviewInfo } from "@nx-repo/data";
-import { Model } from "mongoose";
+import { Document, Model, Types } from "mongoose";
 import { Neo4jService } from "../neo4j/neo4j.service";
 import { ProductService } from "../product/product.service";
 import { Review, ReviewDocument } from "../review/review.schema";
@@ -19,6 +19,45 @@ export class ReviewService{
         return this.reviewModel.findById(
             reviewId,
         );
+    }
+
+    async getProductReviews(productId: string){
+        const ids = await this.neo4jService.singleRead(NeoQueries.findByProduct,{productId})
+
+        console.log(ids.records)
+
+        const matches= [];
+
+        for(const record of ids.records){
+            const id = record.get('match');
+            console.log('id:' + id)
+            const match = await this.reviewModel.findOne({ _id: id });
+            matches.push(match)
+            console.log(match)
+        }
+
+        console.log(matches)
+
+        return matches
+    }
+
+    async getUserReviews(userId){
+        const ids = await this.neo4jService.singleRead(NeoQueries.findByUser,{userId})
+
+        console.log(ids.records)
+
+        const matches= [];
+
+        for(const record of ids.records){
+            const id = record.get('match');
+            console.log('id:' + id)
+            const match = await this.reviewModel.findOne({ _id: id });
+            matches.push(match)
+        }
+
+        console.log(matches)
+
+        return matches
     }
 
     async delete(reviewId: string){
@@ -40,7 +79,7 @@ export class ReviewService{
 
     async createNode(userId:string, id: string){
        await this.neo4jService.singleWrite(NeoQueries.addNode, {id}) 
-       await this.neo4jService.singleWrite(NeoQueries.addNode, {userId, id})
+       await this.neo4jService.singleWrite(NeoQueries.addToUser, {userId, id})
     }
 
     async removeNode(id: string){

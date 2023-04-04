@@ -54,7 +54,7 @@ export class AuthService{
         const user = await this.userModel.findOne({name: username});
 
         return new Promise((resolve, reject) => {
-            sign({username, id: user.id}, process.env.JWT_SECRET, (err: Error, token: string) => {
+            sign({username, id: user.id, roles: user.roles}, process.env.JWT_SECRET, (err: Error, token: string) => {
                 if (err) reject(err);
                 else resolve(token);
             });

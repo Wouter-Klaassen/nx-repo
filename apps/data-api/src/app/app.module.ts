@@ -1,11 +1,13 @@
 import { MiddlewareConsumer, Module } from '@nestjs/common';
-import { RouterModule } from '@nestjs/core';
+import { APP_GUARD, RouterModule } from '@nestjs/core';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { TokenMiddleware } from './auth/token.middleware';
 import { DataModule } from './data.module';
 import { Neo4jModule } from './neo4j/neo4j.module';
 import { RcmdModule } from './rcmd.module';
+import { RolesGuard } from './auth/admin.guard';
+import { AuthGuard } from './auth/auth.guard';
 
 
 
@@ -38,7 +40,11 @@ import { RcmdModule } from './rcmd.module';
     Neo4jModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [{
+    provide: APP_GUARD,
+    useClass: RolesGuard,
+  }
+  ],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {

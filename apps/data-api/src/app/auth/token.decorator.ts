@@ -5,6 +5,7 @@ import { Id } from '@nx-repo/data';
 export interface Token {
   username: Id,
   id: string,
+  roles: string[]
 }
 
 export const InjectToken = createParamDecorator(
