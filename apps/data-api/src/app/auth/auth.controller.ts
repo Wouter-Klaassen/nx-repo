@@ -1,9 +1,12 @@
 import { Body, Controller, HttpException, HttpStatus, Post } from "@nestjs/common";
 import { ResourceId, Token, UserCredentials, UserRegistration } from '@nx-repo/data';
 import { AuthService } from "./auth.service";
+import { User as UserModel, UserDocument } from './user/user.schema';
+
 
 @Controller()
 export class AuthController {
+    userService: any;
 
     constructor(private readonly authService: AuthService) {}
 
@@ -26,12 +29,16 @@ export class AuthController {
     }
 
     @Post('login')
-    async login(@Body() credentials: UserCredentials): Promise<Token> {
+    async login(@Body() credentials: UserCredentials) {
         try {
+            const token = await this.authService.generateToken(credentials.username, credentials.password)
             return {
-                token: await this.authService.generateToken(credentials.username, credentials.password)
+                token: token,
+                user: await this.authService.getOneByUsername(credentials.username),
+
             };
         } catch (e) {
+            console.log(e)
             throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
         }
     }

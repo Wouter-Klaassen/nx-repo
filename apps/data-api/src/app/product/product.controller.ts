@@ -7,7 +7,7 @@ import { RolesGuard } from "../auth/admin.guard";
 import { Roles } from "../auth/roles.decorator";
 
 @Controller('product')
-@UseGuards(RolesGuard)
+// @UseGuards(RolesGuard)
 export class ProductController{
     constructor(private readonly productService: ProductService){}
 

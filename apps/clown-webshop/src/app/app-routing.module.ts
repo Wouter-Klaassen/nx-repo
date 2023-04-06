@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { ProductDetailComponent } from './product/product-detail/product-detail.component';
 import { ProductEditComponent } from './product/product-edit/product-edit.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
     {path: 'home', component: HomeComponent},
@@ -20,7 +21,8 @@ const routes: Routes = [
     // {path: 'form', component: FormComponent},
     {path: 'users', component: UserComponent},
     {path: 'users/:userId', component: UserDetailComponent},
-    {path: 'users/edit/:userId', component: UserEditComponent}
+    {path: 'users/edit/:userId', component: UserEditComponent},
+    {path: 'login', component: LoginComponent}
 ];
 
 @NgModule({

@@ -19,10 +19,10 @@ export class UserService {
     return this.userModel.find();
   }
 
-  async getOne(userId: string): Promise<User | null> {
-    const users = await this.userModel.findById( userId);
+  async getOne(userId: string) {
+    const user = await this.userModel.findById(userId);
 
-    return users[0];
+    return user;
   }
 
 

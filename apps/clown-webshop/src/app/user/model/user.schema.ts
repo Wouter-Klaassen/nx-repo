@@ -1,24 +1,24 @@
 import { range } from "rxjs";
 
 export class User {
-    name: string;
+    username: string;
     password: string;
-    email: string;
-    id: number;
+    emailAddress: string;
+    id: string;
     
     
-    constructor(name : string) {
-        this.id = Math.random();
-        this.name = name,
-        this.password! = 'secret123';
-        this.email = 'r.guilliman@ultramar.ru';
+    constructor(username : string) {
+        this.username = username,
+        this.password = 'secret123';
+        this.emailAddress = 'r.guilliman@ultramar.ru';
+        this.id = ''
     }
     
     getName(){
-        return this.name;
+        return this.username;
     }
     setName(newName : string){
-        this.name = newName;
+        this.username = newName;
     }
 
     getPassword(){
@@ -29,10 +29,10 @@ export class User {
     }
 
     getEmail(){
-        return this.email;
+        return this.emailAddress;
     }
-    setEmail(newEmail : string){
-        this.email = newEmail;
+    setEmail(newemailAddress : string){
+        this.emailAddress = newemailAddress;
     }
 
 

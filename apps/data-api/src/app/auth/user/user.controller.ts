@@ -16,13 +16,14 @@ export class UserController {
 
   // this method should precede the general getOne method, otherwise it never matches
   @Get('self')
-  async getSelf(@InjectToken() token: Token): Promise<User> {
+  async getSelf(@InjectToken() token: Token) {
+    console.log(token)
     const result = await this.userService.getOne(token.id);
     return result;
   }
 
   @Get(':id')
-  async getOne(@Param('id') id: string): Promise<User> {
+  async getOne(@Param('id') id: string) {
     return this.userService.getOne(id);
   }
 }

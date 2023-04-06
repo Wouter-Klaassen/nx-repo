@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
-import { Neo4jConnection } from "@nx-repo/data";
+import { Neo4jConnection, Token } from "@nx-repo/data";
 import { hash, compare } from 'bcrypt';
 import { JwtPayload, verify, sign } from 'jsonwebtoken';
 import { Model } from "mongoose";
@@ -33,6 +33,14 @@ export class AuthService{
         await identity.save()
     }
 
+    async getOneByUsername(username: string){
+
+        const user = await this.userModel.findOne({username: username});
+
+        return user;
+
+    }
+
     async createNode(id:string){
         await this.neo4jService.singleWrite( NeoQueries.addNode ,{id})
     }
@@ -54,7 +62,7 @@ export class AuthService{
         const user = await this.userModel.findOne({name: username});
 
         return new Promise((resolve, reject) => {
-            sign({username, id: user.id, roles: user.roles}, process.env.JWT_SECRET, (err: Error, token: string) => {
+            sign({username, id: user._id, roles: user.roles}, process.env.JWT_SECRET, (err: Error, token: string) => {
                 if (err) reject(err);
                 else resolve(token);
             });
