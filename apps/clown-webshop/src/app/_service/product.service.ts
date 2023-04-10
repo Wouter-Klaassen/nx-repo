@@ -13,7 +13,7 @@ const httpOptions = {
 })
 export class ProductService {
 
-  apiUrl = process.env['apiURL'] + 'data-api/product/'
+  apiUrl = environment.apiURL + 'data-api/product/'
 
   constructor(private http: HttpClient) { }
 

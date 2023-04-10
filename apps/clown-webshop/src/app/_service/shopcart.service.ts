@@ -14,7 +14,7 @@ const httpOptions = {
 })
 export class ShopcartService {
 
-  apiUrl = process.env['apiURL'] + 'data-api/shopcart/'
+  apiUrl = environment.apiURL + 'data-api/shopcart/'
 
   products:any
 
