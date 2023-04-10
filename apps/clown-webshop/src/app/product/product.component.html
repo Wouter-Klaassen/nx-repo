@@ -1,16 +1,19 @@
 <p class="mt-3">Onze Producten</p>
 
-<div class="row" *ngFor="let product of products">
+<div class="row" *ngFor="let product of productData">
     <div class="col">
         <a       
-        [title]="product.title + ' details'"
-        [routerLink]="['/products', product.id]">
-        {{product.title}}</a>
+        [title]="product.name + ' details'"
+        [routerLink]="['/products', product._id]">
+        {{product.name}}</a>
     </div>
-    <div class="col">
-        <button (click)="delete(product)">delete</button>
+    <div class="col" *ngIf="isLoggedIn">
+        <button class="btn btn-success btn-block" (click)="addToCart(product)">add to cart</button>
+    </div>
+    <div class="col" *ngIf="isAdmin">
+        <button class="btn btn-danger btn-block" (click)="delete(product._id)">delete</button>
     </div>
 </div>
-<div class="mt-5">
+<div class="mt-5" *ngIf="isAdmin">
     <a class="btn btn-secondary" [routerLink]="['/products/edit/-1']"><span class="text-center">Add Product</span> </a>
 </div>

@@ -1,0 +1,12 @@
+<div *ngIf="isEmpty; else empty">
+    <div *ngFor="let product of shopcarts">
+        <p>{{product.name}}</p>
+        <button class="mt-2 btn btn-danger btn-block" (click)="remove(product)">remove</button>
+    </div>
+</div>
+<ng-template #empty>
+    <p class="my-5">no items have been selected</p> 
+</ng-template>
+<div class="my-5" *ngIf="isLoggedIn">
+    <button class="btn btn-success btn-block" (click)="save()">save</button>
+</div>
