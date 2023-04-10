@@ -10,10 +10,13 @@ import { AboutComponent } from './about/about.component';
 import { ProductDetailComponent } from './product/product-detail/product-detail.component';
 import { ProductEditComponent } from './product/product-edit/product-edit.component';
 import { LoginComponent } from './login/login.component';
+import { ReviewComponent } from './review/review.component';
+import { RelatedComponent } from './product/related/related.component';
+import { ShopcartComponent } from './shopcart/shopcart.component';
 
 const routes: Routes = [
     {path: 'home', component: HomeComponent},
-    {path: '',   redirectTo: '/home', pathMatch: 'full' },
+    {path: '',   redirectTo: '/products', pathMatch: 'full' },
     {path: 'about', component: AboutComponent},
     {path: 'products', component: ProductComponent},
     {path: 'products/:productId', component: ProductDetailComponent},
@@ -22,7 +25,10 @@ const routes: Routes = [
     {path: 'users', component: UserComponent},
     {path: 'users/:userId', component: UserDetailComponent},
     {path: 'users/edit/:userId', component: UserEditComponent},
-    {path: 'login', component: LoginComponent}
+    {path: 'login', component: LoginComponent},
+    {path: 'review/:id', component: ReviewComponent},
+    {path: 'products/relate/:id', component: RelatedComponent},
+    {path: 'shopcart', component: ShopcartComponent}
 ];
 
 @NgModule({

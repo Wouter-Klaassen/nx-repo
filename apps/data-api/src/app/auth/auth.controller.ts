@@ -32,6 +32,7 @@ export class AuthController {
     async login(@Body() credentials: UserCredentials) {
         try {
             const token = await this.authService.generateToken(credentials.username, credentials.password)
+            console.log("credentials : " + credentials.username)
             return {
                 token: token,
                 user: await this.authService.getOneByUsername(credentials.username),

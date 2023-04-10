@@ -8,8 +8,12 @@ export class Shopcart{
     @Prop({
         required: true,
       })
-      products: string[];
-
+    productIds: string[];
+    
+    @Prop({
+      required: true,
+    })
+    products: string[];
       
     @Prop({
         required: true,

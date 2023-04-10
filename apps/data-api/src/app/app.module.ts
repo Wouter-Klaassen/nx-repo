@@ -1,4 +1,4 @@
-import { MiddlewareConsumer, Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { APP_GUARD, RouterModule } from '@nestjs/core';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
@@ -48,6 +48,13 @@ import { AuthGuard } from './auth/auth.guard';
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(TokenMiddleware).forRoutes('data-api');
+    consumer.apply(TokenMiddleware)  .exclude(
+      { path: 'data-api/product', method: RequestMethod.GET },
+      { path: 'data-api/review', method: RequestMethod.GET },
+      { path: 'data-api/review/product/:id', method: RequestMethod.GET },
+      { path: 'data-api/product/:id', method: RequestMethod.GET},
+      { path: 'data-api/product/:id/relate', method: RequestMethod.GET},
+      'cats/(.*)',
+    ).forRoutes('data-api');
   }
 }

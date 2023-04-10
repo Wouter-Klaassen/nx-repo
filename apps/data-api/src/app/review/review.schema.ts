@@ -10,8 +10,9 @@ export class Review{
         required: true,
       })
       userId: string;
-
-      
+    @Prop({})
+      username:string;
+    
     @Prop({
         required: true,
       })

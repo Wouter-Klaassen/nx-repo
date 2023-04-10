@@ -33,10 +33,11 @@ export class AuthService{
         await identity.save()
     }
 
-    async getOneByUsername(username: string){
+    async getOneByUsername(find: string){
 
-        const user = await this.userModel.findOne({username: username});
-
+        console.log("find : " + find)
+        const user = await this.userModel.findOne({name: find});
+        console.log("user :" + user)
         return user;
 
     }

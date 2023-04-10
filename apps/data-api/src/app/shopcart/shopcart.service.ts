@@ -31,4 +31,11 @@ export class ShopcartService{
     async update(shopcartId: string, updates: Shopcart){
         await this.shopcartModel.findByIdAndUpdate({_id : shopcartId}, updates)
     }
+
+    async getByUser(id: string){
+        console.log("id : " + id)
+        return this.shopcartModel.find({
+            userId : id
+        })
+    }
 }

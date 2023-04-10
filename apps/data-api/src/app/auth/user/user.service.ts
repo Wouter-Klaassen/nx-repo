@@ -25,5 +25,11 @@ export class UserService {
     return user;
   }
 
+  async getOne_(_id: string){
+    const user = await this.userModel.findOne({
+      id : _id
+    })
+    return user
+  }
 
 }

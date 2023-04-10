@@ -13,11 +13,16 @@ import { AboutComponent } from './about/about.component';
 import { ProductDetailComponent } from './product/product-detail/product-detail.component';
 import { ProductEditComponent } from './product/product-edit/product-edit.component';
 import { NavbarComponent } from './_navbar/navbar.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
-import { NgSelectModule  } from '@ng-select/ng-select';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { HttpRequestInterceptor } from './_helpers/http.interceptor';
+import { ReviewComponent } from './review/review.component';
+import { ReviewEditComponent } from './review/review-edit/review-edit.component';
+import { RelatedComponent } from './product/related/related.component';
+import { ShopcartComponent } from './shopcart/shopcart.component';
+import { PurchaseComponent } from './shopcart/purchase/purchase.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +38,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ProductEditComponent,
     NavbarComponent,
     LoginComponent,
+    ReviewComponent,
+    ReviewEditComponent,
+    RelatedComponent,
+    ShopcartComponent,
+    PurchaseComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +53,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgSelectModule,
     NgbModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpRequestInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

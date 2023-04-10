@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { User } from '../model/user.schema';
-import { UserService } from '../../shared/form.service';
+import { StorageService } from '../../_service/storage.service';
 import { LoginService } from '../../_service/login.service';
 
 @Component({
@@ -12,11 +12,11 @@ import { LoginService } from '../../_service/login.service';
 })
 export class UserDetailComponent implements OnInit {
 
-  user : User | undefined;
+  user : any;
   
   constructor(
     private route: ActivatedRoute, 
-    private userService : UserService,
+    private storageService : StorageService,
     private loginService : LoginService) { }
 
 
@@ -25,7 +25,7 @@ export class UserDetailComponent implements OnInit {
     const routeParams = this.route.snapshot.paramMap;
     const userIdFromRoute = String(routeParams.get('userId'));
 
-    this.user = this.userService.getAll().find(user => user.id === userIdFromRoute);
+    this.user = this.storageService.getUser();
   }
 
 }

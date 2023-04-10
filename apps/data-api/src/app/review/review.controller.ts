@@ -5,10 +5,11 @@ import { InjectToken, Token } from "../auth/token.decorator";
 import { Product } from "../product/product.schema";
 import { Review } from "./review.schema";
 import { ReviewService } from "./review.service";
+import { UserService } from "../auth/user/user.service";
 
 @Controller('review')
 export class ReviewController{
-    constructor(private readonly reviewService: ReviewService){}
+    constructor(private readonly reviewService: ReviewService, private readonly userService : UserService){}
 
     @Get()
     async getAll(): Promise<ReviewInfo[]>{
@@ -50,6 +51,10 @@ export class ReviewController{
         try{
             review.productId = productId
             review.userId = token.id
+            console.log("review id : " + token.id)
+            const user = await this.userService.getOne(token.id)
+            console.log("review user : " + user)
+            review.username = user.name
             console.log(token.id)
             const newReview = await this.reviewService.create(review)
             await this.reviewService.createNode(token.id, newReview.id)

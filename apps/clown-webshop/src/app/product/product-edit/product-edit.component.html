@@ -1,12 +1,12 @@
-<div ngClass="mt-5" *ngIf="product != undefined" class="col">
-    <div *ngIf="product.id >= 0">
+<div ngClass="mt-5" *ngIf="product !== undefined" class="col">
+    <div>
         <div>
             <p>
-                <b>{{product.title}}</b>
+                <b>{{product.name}}</b>
             </p>
             <label for="title">new title: </label>
             <input id="title" type="text" [formControl]="title">
-            <button (click)="editTitle()">Save</button>
+            <!-- <button (click)="editTitle()">Save</button> -->
         </div>
         <br>
         <div>
@@ -15,20 +15,40 @@
             </p>
             <label for="description">new description: </label>
             <input id="description" type="text" [formControl]="description">
-            <button (click)="editDescription()">Save</button>  
+            <!-- <button (click)="editDescription()">Save</button>   -->
         </div>
         <br>
         <div>
             <p>
-                <b>{{product.prijs}}</b>
+                <b>€{{product.price}}</b>
             </p>    
             <label for="prijs">new price: </label>
             <input id="prijs" type="text" [formControl]="prijs">
-            <button (click)="editPrijs()">Save</button>
+            <!-- <button (click)="editPrijs()">Save</button> -->
+        </div>        
+        <br>
+        <div>
+            <p>
+                <b>{{product.category}}</b>
+            </p>    
+            <label for="prijs">new category: </label>
+            <input id="prijs" type="text" [formControl]="category">
+            <!-- <button (click)="editPrijs()">Save</button> -->
+        </div>        
+        <br>
+        <div>
+            <p>
+                <b>{{product.brand}}</b>
+            </p>    
+            <label for="prijs">new brand: </label>
+            <input id="prijs" type="text" [formControl]="brand">
+            <!-- <button (click)="editPrijs()">Save</button> -->
         </div>
+        <br>
+        <button (click)="edit()">Save</button>
     </div>
 </div>
-<div class="mt-5" *ngIf="product == undefined">
+<div class="mt-5" *ngIf="product === undefined">
     <div class="row">
         <div class="col">
             <label for="title">Title: </label>
@@ -47,10 +67,26 @@
     </div>
     <div class="row">
         <div class="col">
-            <label for="description">Prijs: </label>
+            <label for="description">Price: </label>
         </div>
         <div class="col">
             <input id="description" type="text" [formControl]="prijs">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label for="description">Category: </label>
+        </div>
+        <div class="col">
+            <input id="description" type="text" [formControl]="category">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label for="description">Brand: </label>
+        </div>
+        <div class="col">
+            <input id="description" type="text" [formControl]="brand">
         </div>
     </div>
     <br>

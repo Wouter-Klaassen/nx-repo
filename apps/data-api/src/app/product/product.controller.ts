@@ -12,13 +12,13 @@ export class ProductController{
     constructor(private readonly productService: ProductService){}
 
     @Get()
-    @Roles('admin')   
+    // @Roles('admin')   
     async getAll(): Promise<ProductInfo[]>{
         return this.productService.getAll();
     }
     
     @Get(':id')
-    @Roles('admin')    
+    // @Roles('admin')    
     async getOne(@Param('id') id: string): Promise<ProductInfo>{
         
         return this.productService.getOne(id);
@@ -26,7 +26,7 @@ export class ProductController{
 
     
     @Put(':id')
-    @Roles('admin')
+    // @Roles('admin')
     async update(@Param('id') id: string, @Body() update: Product) {
         try{
             await this.productService.update(id, update )
@@ -40,7 +40,7 @@ export class ProductController{
     }
 
     @Post()
-    @Roles('admin')
+    // @Roles('admin')
     async create(@Body()product: Product){
         try{
             const newProduct = await this.productService.create(product)
@@ -54,27 +54,27 @@ export class ProductController{
     }
 
     @Delete(':id')
-    @Roles('admin')
+    // @Roles('admin')
     async delete(@Param('id') id: string){
         await this.productService.delete(id)
         await this.productService.deleteNode(id)
     }
 
     @Post(':idA/relate/:idB')
-    @Roles('admin')
+    // @Roles('admin')
     async createRelation(@Param('idA') idA: string, @Param('idB') idB: string){
         console.log('id A : ' + idA +  ', id B : ' + idB)
         await this.productService.addProductRelation(idA, idB)
     }
 
     @Delete(':idA/relate/:idB')
-    @Roles('admin')
+    // @Roles('admin')
     async deleteRelation(@Param('idA') idA: string, @Param('idB') idB: string){
         await this.productService.deleteProductRelation(idA, idB)
     }
 
     @Get(':id/relate')
-    @Roles('admin')
+    // @Roles('admin')
     async getRelatedProducts(@Param('id') id: string){
 //        const products = await this.productService.getRelatedProducts(id)
         return this.productService.getRelatedProducts(id)

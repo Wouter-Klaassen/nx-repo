@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-secondary" *ngIf="isLoggedIn">
+<nav class="navbar navbar-expand-lg bg-secondary">
     <div class="container-fluid mx-5">
       <ul class="navbar-nav">
         <li class="nav-item">
@@ -7,7 +7,7 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="products" routerLinkActive="true" ariaCurrentWhenActive="page">products</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="isAdmin">
           <a class="nav-link" routerLink="users" routerLinkActive="true" ariaCurrentWhenActive="page">users</a>
         </li>
         <li class="nav-item">
@@ -30,9 +30,12 @@
     </ul>
 
     <ul class="navbar-nav mx-4" *ngIf="isLoggedIn">
-      <!-- <li class="nav-item">
-        <a href="/profile" class="nav-link" routerLink="profile">{{ email }}</a>
-      </li> -->
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['../shopcart']">Shopcart</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['../users/' , user.id]">Profile</a>
+      </li>
       <li class="nav-item">
         <a href class="nav-link" (click)="logout()">LogOut</a>
       </li>

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { ProductService } from '../../shared/form.service';
+import { ProductService } from '../../_service/product.service';
 import { Product } from '../model/product.schema';
+import { stringify } from 'querystring';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'nx-repo-product-edit',
@@ -11,47 +13,84 @@ import { Product } from '../model/product.schema';
 })
 export class ProductEditComponent implements OnInit {
   
-  product? : Product
+  product? : any
 
   title = new FormControl();
   description = new FormControl();
   prijs = new FormControl();
+  category = new FormControl();
+  brand = new FormControl();
+  private routeSub: Subscription | undefined;
+  data :any
+
+  productIdFromRoute = '';
 
   constructor(
     private route: ActivatedRoute, 
-    private formService : ProductService
+    private productService : ProductService
   ) { }
   
-  ngOnInit(): void {
-    const routeParams = this.route.snapshot.paramMap;
-    const productIdFromRoute = Number(routeParams.get('productId'));
-    if(productIdFromRoute != null){
-      if(this.formService.getAll().find(product => product.id === productIdFromRoute) != undefined){
-        this.product = this.formService.getAll().find(product => product.id === productIdFromRoute)
+  async ngOnInit() {
+    await this.loadProduct()
+
+
+    // this.productIdFromRoute = String(routeParams.get('productId'));
+    // console.log('id: ' + this.productIdFromRoute)
+    // if(this.productIdFromRoute != null){
+    //   if(this.productService.getById(this.productIdFromRoute) != undefined){
+    //     this.product = this.productService.getById(this.productIdFromRoute)
+    //   }
+    // }
+  }
+
+  async loadProduct(){
+    this.routeSub = this.route.params.subscribe(params =>{
+      console.log('id : ' + params['productId'])
+      if(params['productId'] != '-1'){
+        this.productService.getById(params['productId']).subscribe(res => {
+          this.product = res
+          this.title.setValue( this.product.name)
+          this.description.setValue(this.product.description) 
+          this.prijs.setValue( this.product.price)
+          this.category.setValue(this.product.category) 
+          this.brand.setValue(this.product.brand) 
+        })
       }
-    }
+      this.productIdFromRoute = params['productId']
+    })
   }
 
-  add(){
+  async add(){
     if(this.title.value != null && this.description.value != null && this.prijs.value != null){
-      const newProduct = new Product()
-      newProduct.title = this.title.value;
-      newProduct.description = this.description.value
-      newProduct.prijs = this.prijs.value
-      this.formService.add(newProduct)
+      this.data = this.productService.getAll().subscribe()
+      
+
+      const price : number = +this.prijs.value
+      const newProduct = {
+
+        name : this.title.value,
+        description : this.description.value,
+        price : price,
+        category : this.category.value,
+        brand : this.brand.value
+        
+      }
+      this.productService.create(newProduct).subscribe()
     }
   }
 
-  editTitle(){
-    this.product?.setTitle(this.title.value)
-  }
+  edit(){
+    
+      const price : number = +this.prijs.value
+      const update = {
 
-  editDescription(){
-    this.product?.setDescription(this.description.value)
+        name : this.title.value,
+        description : this.description.value,
+        price : price,
+        category : this.category.value,
+        brand : this.brand.value
+      }
+      this.productService.update(this.productIdFromRoute,update).subscribe()
   }
-
-  editPrijs(){
-    this.product?.setPrijs(this.prijs.value)
-  }
-
 }
+

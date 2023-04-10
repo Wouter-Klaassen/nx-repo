@@ -16,12 +16,15 @@ export class NavbarComponent implements OnInit {
   showModeratorBoard = false;
   email?: string;
   isAdmin = false;
+  user : any;
 
   constructor(private storageService: StorageService, private authService: LoginService, private router : Router) { }
 
   ngOnInit(){
     this.isLoggedIn = this.storageService.isLoggedIn();
     this.isAdmin = this.storageService.isAdmin();
+    this.user = this.storageService.getUser();
+    console.log("user : "  + typeof(this.user) )
   }
 
 
