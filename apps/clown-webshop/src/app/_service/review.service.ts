@@ -14,7 +14,7 @@ const httpOptions = {
 })
 export class ReviewService {
 
-  apiUrl = environment.apiURL + 'data-api/review/'
+  apiUrl = process.env['apiURL'] + 'data-api/review/'
 
   constructor(private http: HttpClient) { }
 

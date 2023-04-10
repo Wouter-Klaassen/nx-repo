@@ -18,7 +18,7 @@ const httpOptions = {
 })
 export class LoginService {
   
-  apiUrl = environment.apiURL + 'auth-api/'
+  apiUrl = process.env['apiURL'] + 'auth-api/'
 
   token : string | undefined;
   
