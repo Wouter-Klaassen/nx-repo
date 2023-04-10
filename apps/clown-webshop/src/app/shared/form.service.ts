@@ -19,7 +19,7 @@ export class UserService {
       return this.users;
     }
 
-    get(id : Number){
+    get(id : string){
       return this.users.find(user => user.id === id);
     }
   

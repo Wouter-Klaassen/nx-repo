@@ -2,28 +2,30 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { User } from '../model/user.schema';
-import { UserService } from '../../shared/form.service';
+import { StorageService } from '../../_service/storage.service';
+import { LoginService } from '../../_service/login.service';
 
 @Component({
-  selector: 'user',
+  selector: 'nx-repo-user',
   templateUrl: './user-detail.component.html',
   styleUrls: ['./user-detail.component.css']
 })
 export class UserDetailComponent implements OnInit {
 
-  user : User | undefined;
+  user : any;
   
   constructor(
     private route: ActivatedRoute, 
-    private formService : UserService) { }
+    private storageService : StorageService,
+    private loginService : LoginService) { }
 
 
   ngOnInit() {
 
     const routeParams = this.route.snapshot.paramMap;
-    const userIdFromRoute = Number(routeParams.get('userId'));
+    const userIdFromRoute = String(routeParams.get('userId'));
 
-    this.user = this.formService.getAll().find(user => user.id === userIdFromRoute);
+    this.user = this.storageService.getUser();
   }
 
 }

@@ -1,6 +1,6 @@
 <div class="mt-5" *ngIf="product">
     <p>
-        <b>{{ product.title }}</b>
+        <b>{{ product.name }}</b>
     </p>
         <br>
     <p>
@@ -9,7 +9,44 @@
         {{ product.description }}
     </p>
         <br>
-    <p>Prijs: €{{ product.prijs }}</p>
+    <p>Prijs: €{{ product.price }}</p>
     <br>
-    <a class="btn btn-secondary" [routerLink]="['/products/edit', product.id]">edit</a>
+    <a *ngIf="isAdmin" class="btn btn-secondary" [routerLink]="['/products/edit', productIdFromRoute]">edit</a>
+</div>
+
+<div class="row mt-5">
+    <h2> Reviews:</h2>
+    <div>
+        <a class="btn btn-secondary btn-block" [routerLink]="['/review/',productIdFromRoute ]" *ngIf="isLoggedIn">Post a review </a>
+    </div>
+    <div class="col-3" *ngFor="let item of reviewData">
+        <div class="card">
+            <div *ngIf="item.username; else anon">
+                <h3 class="mx-3 card-title">{{item.username}}
+                </h3>
+            </div>
+            <ng-template #anon><h3 class="mx-3 card-title">anonymous</h3></ng-template>
+            
+            <p class="mx-4">
+                {{item.ratingOutOfTen}};  {{item.text}}
+            </p>
+            <button class="btn btn-warning btn-block" *ngIf="isAdmin" (click)="removeReview(item._id)" >Delete</button>
+
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <h2> Gerelateerde producten:</h2>
+    <div class="col-3" *ngFor="let item of relatedProducts">
+        <div class="card">
+            <h3 class="mx-3 card-title">
+                <a [routerLink]="['/products/', item._id]">{{item.name}}</a>
+            </h3>
+            <button class="btn btn-warning btn-block" *ngIf="isAdmin" (click)="removeRelation(item._id)" >Delete</button>
+        </div>
+    </div>
+    <div>
+        <button *ngIf="isAdmin" class="btn btn-secondary btn-block" [routerLink]="['/products/relate/',productIdFromRoute]">add product</button>
+    </div>
 </div>

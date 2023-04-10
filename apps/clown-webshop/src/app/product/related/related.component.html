@@ -1,0 +1,13 @@
+
+
+<div class="row" *ngFor="let product of products">
+    <div class="my-3 col">
+        <a       
+        [title]="product.name + ' details'"
+        [routerLink]="['/products', product._id]">
+        {{product.name}}</a>
+    </div>
+    <div class="my-3 col">
+        <button class="btn btn-secondary btn-block" (click)="relate(product._id)">make relation</button>
+    </div>
+</div>

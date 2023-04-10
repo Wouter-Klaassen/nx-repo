@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 
 import { User } from '../model/user.schema';
 import { UserService } from '../../shared/form.service';
+import { LoginService } from '../../_service/login.service';
 
 @Component({
-  selector: 'edit',
+  selector: 'nx-repo-edit',
   templateUrl: './user-edit.component.html',
   styleUrls: ['./user-edit.component.css']
 })
@@ -15,37 +16,42 @@ export class UserEditComponent implements OnInit {
   
   user? : User
 
-  name = new FormControl();
+  username = new FormControl();
   password = new FormControl();
   email = new FormControl();
 
 
   constructor(
     private route: ActivatedRoute, 
-    private formService : UserService) { }
+    private userService : UserService,
+    private loginService : LoginService,
+    private router : Router) { }
 
 
   ngOnInit() {
     const routeParams = this.route.snapshot.paramMap;
-    const userIdFromRoute = Number(routeParams.get('userId'));
+    const userIdFromRoute = String(routeParams.get('userId'));
     if(userIdFromRoute != null){
-      if(this.formService.getAll().find(user => user.id === userIdFromRoute) != undefined){
-        this.user = this.formService.getAll().find(user => user.id === userIdFromRoute)
+      if(this.userService.getAll().find(user => user.id === userIdFromRoute) != undefined){
+        this.user = this.userService.getAll().find(user => user.id === userIdFromRoute)
       }
     }
   }
 
   addUser(){
-    if(this.name.value != null && this.password.value != null && this.email.value != null){
-      const newUser = new User(this.name.value)
-      newUser.setPassword(this.password.value)
-      newUser.setEmail(this.email.value)
-      this.formService.addUser(newUser)
+    if(this.username.value != null && this.password.value != null && this.email.value != null){
+      const newUser = {
+        username: this.username.value,
+        emailAddress : this.email.value,
+        password: this.password.value
+      }
+      this.loginService.register(newUser).subscribe()
+      this.router.navigate(['/login']);
     }
   }
 
   editName(){
-    this.user?.setName(this.name.value);
+    this.user?.setName(this.username.value);
   }
 
   editPassword(){

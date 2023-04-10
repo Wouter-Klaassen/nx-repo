@@ -2,9 +2,9 @@
 <div class="row" *ngFor="let user of users">
     <div class="col">
         <a       
-        [title]="user.name + ' details'"
+        [title]="user.username + ' details'"
         [routerLink]="['/users', user.id]">
-        {{user.name}}</a>
+        {{user.username}}</a>
     </div>
     <div class="col">
         <button type="" (click)="deleteUser(user)">delete</button>

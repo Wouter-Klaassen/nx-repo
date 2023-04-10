@@ -3,7 +3,7 @@ import { UserService } from '../shared/form.service';
 import { User } from './model/user.schema';
 
 @Component({
-  selector: 'users',
+  selector: 'nx-repo-users',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
