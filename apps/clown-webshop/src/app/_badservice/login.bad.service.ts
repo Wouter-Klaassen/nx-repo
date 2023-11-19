@@ -14,18 +14,18 @@ export class LoginService {
         this.validUsers = [
             {
                 "_id":"640f269a307aa0a7f6dddbcf",
-                "username": "bezos",
+                "username": "Jeff Bezos",
                 "password": "secret123",
-                "emailAddress": "jeff@bezos.com",
+                "emailAddress": "jeff.b@amazon.com",
                 "reviews":[],
                 "isActive": true,
                 "roles":["admin"]
             },
             {
                 "_id":"6428464227d20206708ec0a1" ,
-                "username": "Jim",
+                "username": "Jim Steele",
                 "password": "secret123",
-                "emailAddress": "jim@bozo.nl",    
+                "emailAddress": "jim@gmail.nl",    
                 "reviews":[],
                 "isActive": true,
                 "roles":["admin"]
@@ -33,13 +33,13 @@ export class LoginService {
             },
             {
                 "_id":"64369216392b6edf0868f67a",
-                "username":"Bob Schippers",
+                "username":"Admin",
                 "password":"secret123",
-                "emailAddress":"bob@schippers.nl",
+                "emailAddress":"admin@test.nl",
                 "reviews":[],
                 "isActive": true,
                 "roles":["admin"]
-            }
+            },
         ]
     }
 

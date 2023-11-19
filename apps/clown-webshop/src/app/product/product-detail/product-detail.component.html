@@ -9,9 +9,9 @@
         {{ product.description }}
     </p>
         <br>
-    <p>Prijs: €{{ product.price }}</p>
-    <p>Merk : {{product.brand}}</p>
-    <p>Categorie : {{product.category}}</p>
+    Prijs: €{{ product.price }} <br>
+    Merk : {{product.brand}} <br>
+    Categorie : {{product.category}} <br>
     
     
     <br>
@@ -21,6 +21,7 @@
 <div class="row mt-5">
     <h2> Reviews:</h2>
     <div>
+        <i>(t.b.a)</i> <br>
         <a class="btn btn-secondary btn-block" [routerLink]="['/review/',productIdFromRoute ]" *ngIf="isLoggedIn">Post a review </a>
     </div>
     <div class="col-3" *ngFor="let item of reviewData">
