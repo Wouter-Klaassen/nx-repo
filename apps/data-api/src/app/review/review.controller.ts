@@ -22,16 +22,16 @@ export class ReviewController{
         return this.reviewService.getOne(id);
     }
 
-    @Get('product/:id')
-    async getByProduct(@Param('id') id: string){
-        return this.reviewService.getProductReviews(id);
-    }
+    // @Get('product/:id')
+    // async getByProduct(@Param('id') id: string){
+    //     return this.reviewService.getProductReviews(id);
+    // }
 
-    @Get('user/:id')
-    async getByUser(@Param('id') id :string){
-        console.log('id: ' + id)
-        return this.reviewService.getUserReviews(id);
-    }
+    // @Get('user/:id')
+    // async getByUser(@Param('id') id :string){
+    //     console.log('id: ' + id)
+    //     return this.reviewService.getUserReviews(id);
+    // }
 
     @Put(':id')
     async update(@Param('id') id: string, @Body() update: Review) {
@@ -51,14 +51,9 @@ export class ReviewController{
         try{
             review.productId = productId
             review.userId = token.id
-            console.log("review id : " + token.id)
             const user = await this.userService.getOne(token.id)
-            console.log("review user : " + user)
             review.username = user.name
-            console.log(token.id)
             const newReview = await this.reviewService.create(review)
-            await this.reviewService.createNode(token.id, newReview.id)
-            await this.reviewService.addToProduct(productId, newReview.id)
             return {statusCode: 200, message:"OK"}
         }
         catch(e){
@@ -70,6 +65,6 @@ export class ReviewController{
     @Delete(':id')
     async delete(@Param('id') id: string){
         await this.reviewService.delete(id)
-        await this.reviewService.removeNode(id)
+        
     }
 }

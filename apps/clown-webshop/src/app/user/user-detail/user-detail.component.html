@@ -1,6 +1,6 @@
 
 <div class="mt-5" *ngIf="user">
-    <p>{{ user.name }}</p>
+    <p>{{ user.username }}</p>
     <p>{{ user.emailAddress }}</p>
     <br>
     <a class="btn btn-secondary" [routerLink]="['/users/edit', user.id]">edit</a>

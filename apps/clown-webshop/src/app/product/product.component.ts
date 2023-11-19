@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../_service/product.service';
+import { ProductService } from '../_badservice/product.bad.service';
 import { Product } from './model/product.schema';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -39,7 +39,7 @@ export class ProductComponent implements OnInit {
 
 
   async loadProducts(){
-    this.routeSub = this.productService.getAll().subscribe(res=>{
+    this.routeSub = this.productService.getAll().subscribe((res: any)=>{
       console.log('res type ' + typeof(res))
       this.productData=res;
     })

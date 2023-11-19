@@ -17,7 +17,7 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-  //Mongo CRUB
+  //Mongo CRUD
 
   getAll(){
     return this.http.get(this.apiUrl, httpOptions )

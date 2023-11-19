@@ -1,11 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
-import { Neo4jConnection, Token } from "@nx-repo/data";
 import { hash, compare } from 'bcrypt';
 import { JwtPayload, verify, sign } from 'jsonwebtoken';
 import { Model } from "mongoose";
-import { Neo4jService } from "../neo4j/neo4j.service";
-import { NeoQueries } from "./auth.cypher";
 import { Identity, IdentityDocument } from "./identity.schema";
 import { User, UserDocument } from "./user/user.schema";
 
@@ -15,7 +12,6 @@ export class AuthService{
     constructor(
         @InjectModel(Identity.name) private identityModel: Model<IdentityDocument>,
         @InjectModel(User.name) private userModel: Model<UserDocument>,
-        private readonly neo4jService: Neo4jService
     ) {}
 
     async createUser(name: string, emailAddress: string, roles: string[]){
@@ -40,10 +36,6 @@ export class AuthService{
         console.log("user :" + user)
         return user;
 
-    }
-
-    async createNode(id:string){
-        await this.neo4jService.singleWrite( NeoQueries.addNode ,{id})
     }
 
     async verifyToken(token: string): Promise<string | JwtPayload> {

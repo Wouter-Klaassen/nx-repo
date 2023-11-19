@@ -34,7 +34,6 @@ export class ProductController{
         }
         catch(e){
             console.log(e);
-            console.log(process.env.NEO4J_DATABASE)
             throw new HttpException("Update Unsuccesfull", HttpStatus.BAD_REQUEST);
         }
     }
@@ -44,7 +43,6 @@ export class ProductController{
     async create(@Body()product: Product){
         try{
             const newProduct = await this.productService.create(product)
-            await this.productService.createNode(newProduct.id)
             return newProduct
         }
         catch(e){
@@ -57,26 +55,5 @@ export class ProductController{
     // @Roles('admin')
     async delete(@Param('id') id: string){
         await this.productService.delete(id)
-        await this.productService.deleteNode(id)
-    }
-
-    @Post(':idA/relate/:idB')
-    // @Roles('admin')
-    async createRelation(@Param('idA') idA: string, @Param('idB') idB: string){
-        console.log('id A : ' + idA +  ', id B : ' + idB)
-        await this.productService.addProductRelation(idA, idB)
-    }
-
-    @Delete(':idA/relate/:idB')
-    // @Roles('admin')
-    async deleteRelation(@Param('idA') idA: string, @Param('idB') idB: string){
-        await this.productService.deleteProductRelation(idA, idB)
-    }
-
-    @Get(':id/relate')
-    // @Roles('admin')
-    async getRelatedProducts(@Param('id') id: string){
-//        const products = await this.productService.getRelatedProducts(id)
-        return this.productService.getRelatedProducts(id)
     }
 }

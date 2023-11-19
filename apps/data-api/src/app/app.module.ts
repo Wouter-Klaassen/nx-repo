@@ -14,13 +14,7 @@ import { AuthGuard } from './auth/auth.guard';
 @Module({
   imports: [MongooseModule.forRoot(
     `mongodb+srv://${process.env.MONGO_USR}:${process.env.MONGO_PWD}@${process.env.MONGO_HOST}/${process.env.MONGO_DATABASE}?retryWrites=true&w=majority`  ),    
-    Neo4jModule.forRoot({
-      scheme: 'neo4j+s',
-      host: process.env.NEO4J_HOST,
-      username: process.env.NEO4J_USR,
-      password: process.env.NEO4J_PWD,
-      database: process.env.NEO4J_DATABASE,
-    }),
+    
     AuthModule,
     DataModule,
     RouterModule.register([
@@ -32,12 +26,7 @@ import { AuthGuard } from './auth/auth.guard';
         path: 'data-api',
         module: DataModule,
       },
-      {
-        path: 'rcmd-api',
-        module: RcmdModule,
-      },
     ]),
-    Neo4jModule,
   ],
   controllers: [],
   providers: [{
@@ -53,7 +42,6 @@ export class AppModule {
       { path: 'data-api/review', method: RequestMethod.GET },
       { path: 'data-api/review/product/:id', method: RequestMethod.GET },
       { path: 'data-api/product/:id', method: RequestMethod.GET},
-      { path: 'data-api/product/:id/relate', method: RequestMethod.GET},
       'cats/(.*)',
     ).forRoutes('data-api');
   }

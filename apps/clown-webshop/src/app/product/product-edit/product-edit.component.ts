@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { ProductService } from '../../_service/product.service';
+import { ProductService } from '../../_badservice/product.bad.service';
 import { Product } from '../model/product.schema';
 import { stringify } from 'querystring';
 import { Subscription } from 'rxjs';

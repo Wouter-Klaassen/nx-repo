@@ -19,7 +19,6 @@ export class AuthController {
             await this.authService.registerUser(credentials.username, credentials.password, credentials.emailAddress);
             
             const newUser = await this.authService.createUser(credentials.username, credentials.emailAddress, credentials.roles);
-            await this.authService.createNode(newUser.id)
             return {id: newUser.id};
         } catch (e) {
             console.log(e);

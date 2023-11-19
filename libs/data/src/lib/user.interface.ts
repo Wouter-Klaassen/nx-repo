@@ -2,8 +2,9 @@ import { Id } from './id.type'
 import { Review } from './review.interface'
 
 export interface UserIdentity {
-    id: Id
-    name: string
+    _id: Id
+    username: string
+    password:string
 }
 
 export interface UserInfo extends UserIdentity {

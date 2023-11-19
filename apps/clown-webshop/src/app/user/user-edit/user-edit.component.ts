@@ -4,7 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 
 import { User } from '../model/user.schema';
 import { UserService } from '../../shared/form.service';
-import { LoginService } from '../../_service/login.service';
+import { LoginService } from '../../_badservice/login.bad.service';
 
 @Component({
   selector: 'nx-repo-edit',

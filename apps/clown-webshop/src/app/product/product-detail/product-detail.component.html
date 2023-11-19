@@ -10,6 +10,10 @@
     </p>
         <br>
     <p>Prijs: €{{ product.price }}</p>
+    <p>Merk : {{product.brand}}</p>
+    <p>Categorie : {{product.category}}</p>
+    
+    
     <br>
     <a *ngIf="isAdmin" class="btn btn-secondary" [routerLink]="['/products/edit', productIdFromRoute]">edit</a>
 </div>
@@ -35,7 +39,7 @@
         </div>
     </div>
 </div>
-
+<!-- 
 <div class="row mt-5">
     <h2> Gerelateerde producten:</h2>
     <div class="col-3" *ngFor="let item of relatedProducts">
@@ -49,4 +53,4 @@
     <div>
         <button *ngIf="isAdmin" class="btn btn-secondary btn-block" [routerLink]="['/products/relate/',productIdFromRoute]">add product</button>
     </div>
-</div>
+</div> -->
