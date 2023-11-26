@@ -1,1 +1,21 @@
-<p>review-edit works!</p>
+<div class="mt-5" >
+    <div class="row">
+        <div class="col">
+            <label for="title">Text: </label>
+        </div>
+        <div class="col">
+            <input id="title" type="text" [formControl]="text">
+        </div>
+    </div>
+    <div class="row" >
+        <div class="col">
+            <label for="description">Rating: </label>
+        </div>
+        <div class="col">
+            <input id="description" type="text" [formControl]="outOfTen">
+        </div>
+    </div>
+    <div class="row">
+        <button class="btn btn-primary btn-block"  (click)="edit()">Submit</button>
+    </div>
+</div>

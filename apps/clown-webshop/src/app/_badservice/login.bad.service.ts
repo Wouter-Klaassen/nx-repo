@@ -44,7 +44,7 @@ export class LoginService {
     }
 
     login(user: any) {
-        let found  = this.validUsers.find(x => x.username == user.username && x.password == user.password)
+        let found  = this.validUsers.find(x => x.username = user.username && x.password == user.password)
 
         return of({"token" : "super-secret-token", "user": found})
     }

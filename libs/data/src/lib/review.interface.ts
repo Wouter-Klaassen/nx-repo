@@ -1,6 +1,7 @@
 export interface ReviewIdentity {
     userId: string;
     productId: string;
+    _id: string;
 }
 
 

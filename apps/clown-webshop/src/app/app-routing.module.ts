@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 import { ReviewComponent } from './review/review.component';
 import { RelatedComponent } from './product/related/related.component';
 import { ShopcartComponent } from './shopcart/shopcart.component';
+import { ReviewEditComponent } from './review/review-edit/review-edit.component';
 
 const routes: Routes = [
     {path: 'home', component: HomeComponent},
@@ -27,6 +28,7 @@ const routes: Routes = [
     {path: 'users/edit/:userId', component: UserEditComponent},
     {path: 'login', component: LoginComponent},
     {path: 'review/:id', component: ReviewComponent},
+    {path: 'review/edit/:reviewId', component: ReviewEditComponent},
     {path: 'products/relate/:id', component: RelatedComponent},
     {path: 'shopcart', component: ShopcartComponent}
 ];

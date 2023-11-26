@@ -4,7 +4,7 @@ import { Product } from '../model/product.schema';
 import { ProductService } from '../../_badservice/product.bad.service';
 import { Subscription } from 'rxjs';
 import { StorageService } from '../../_service/storage.service';
-import { ReviewService } from '../../_service/review.service';
+import { ReviewService } from '../../_badservice/review.bad.service';
 
 @Component({
   selector: 'nx-repo-product',
@@ -69,6 +69,7 @@ export class ProductDetailComponent implements OnInit {
   loadReviews(){
     this.subscription = this.reviewService.getByProduct(this.productIdFromRoute).subscribe(res=>{
       console.log('res type ' + typeof(res))
+      console.log('res : ' + JSON.stringify(res))
       this.reviewData=res;
     })
   }
@@ -79,5 +80,6 @@ export class ProductDetailComponent implements OnInit {
 
   async removeReview(id:string){
     this.reviewService.delete(id).subscribe()
+    this.loadReviews()
   }
 }

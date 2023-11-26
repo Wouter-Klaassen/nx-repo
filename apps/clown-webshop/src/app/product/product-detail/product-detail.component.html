@@ -21,7 +21,6 @@
 <div class="row mt-5">
     <h2> Reviews:</h2>
     <div>
-        <i>(t.b.a)</i> <br>
         <a class="btn btn-secondary btn-block" [routerLink]="['/review/',productIdFromRoute ]" *ngIf="isLoggedIn">Post a review </a>
     </div>
     <div class="col-3" *ngFor="let item of reviewData">
@@ -33,10 +32,12 @@
             <ng-template #anon><h3 class="mx-3 card-title">anonymous</h3></ng-template>
             
             <p class="mx-4">
-                {{item.ratingOutOfTen}};  {{item.text}}
+                {{item.rating}}/10;  {{item.text}}
             </p>
-            <button class="btn btn-warning btn-block" *ngIf="isAdmin" (click)="removeReview(item._id)" >Delete</button>
-
+            <div>
+                <a class="col-6 btn btn-warning btn-block" *ngIf="isAdmin" [routerLink]="['/review/edit/',item._id]">Edit</a>
+                <button class="col-6 btn btn-danger btn-block" *ngIf="isAdmin" (click)="removeReview(item._id)" >Delete</button>
+            </div>
         </div>
     </div>
 </div>
